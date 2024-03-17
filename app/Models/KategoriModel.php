@@ -11,6 +11,7 @@ class KategoriModel extends Model
     use HasFactory;
     protected $table = 'm_kategori'; //mendefinisikan nama tabel yg digunakan oleh model
     protected $primaryKey = 'kategori_id'; //mendefinisikan primary key dr tabel yg digunakan
+    protected $fillable = ['kategori_kode', 'kategori_nama'];
 
     public function barang(): HasMany
     {
