@@ -21,8 +21,31 @@ class KategoriDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
+        /*return (new EloquentDataTable($query))
+            ->addColumn('action', function ($data) {
+                return '<a href="kategori/edit/' . $data->kategori_id . '" class="btn btn-sm btn-primary mr-1">
+                <i class="bi bi-pencil-square"></i>
+                </a>
+
+                <form action="kategori/delete/{{ $data->kategori_id }}" method="POST" style="display:inline">
+                    ' . csrf_field() . '
+                    ' . method_field('DELETE') . '
+                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm(\'Are you sure you want to delete this item?\')"><i class="bi bi-trash"></i></button>
+                  </form>';
+            })
+            ->setRowId('id');*/
         return (new EloquentDataTable($query))
-            /*	->addColumn('action', 'kategori.action') */
+            ->addColumn('action', function ($data) {
+                return '<a href="kategori/edit/' . $data->kategori_id . '" class="btn btn-sm btn-primary mr-1">
+                    <i class="bi bi-pencil-square"></i>
+                    </a>
+
+                    <form action="kategori/delete/' . $data->kategori_id . '" method="POST" style="display:inline">
+                        ' . csrf_field() . '
+                        ' . method_field('DELETE') . '
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm(\'Are you sure you want to delete this item?\')"><i class="bi bi-trash"></i></button>
+                    </form>';
+            })
             ->setRowId('id');
     }
 
@@ -62,11 +85,17 @@ class KategoriDataTable extends DataTable
     {
         return [
             /*	Column::computed('action')
-->exportable(false)
-->printable(false)
-->width(60)
-->addClass('text-center'), */
+            ->exportable(false)
+            ->printable(false)
+            ->width(60)
+            ->addClass('text-center'), */
             Column::make('kategori_id'), Column::make('kategori_kode'), Column::make('kategori_nama'), Column::make('created_at'), Column::make('updated_at'),
+            Column::computed('action')
+                ->title('Action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center')
         ];
     }
 

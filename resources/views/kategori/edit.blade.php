@@ -27,6 +27,7 @@
                             placeholder="Kode Kategori" value="{{ $data->kategori_nama }}">
                     </div>
                 </div>
+                {{-- <a href="../../kategori" class="btn btn-secondary btn-sm">Back</button> --}}
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Ubah</button>
                 </div>
