@@ -4,7 +4,7 @@
 
 @section('subtitle', 'Kategori')
 @section('content_header_title', 'Kategori')
-@section('content_header_subtitle', 'Create')
+@section('content_header_subtitle', 'Edit')
 {{-- Content body: main page content --}}
 @section('content')
     <div class="container">
@@ -27,8 +27,8 @@
                             placeholder="Kode Kategori" value="{{ $data->kategori_nama }}">
                     </div>
                 </div>
-                {{-- <a href="../../kategori" class="btn btn-secondary btn-sm">Back</button> --}}
                 <div class="card-footer">
+                    <a href="../../kategori" class="btn btn-secondary">Kembali</a>
                     <button type="submit" class="btn btn-primary">Ubah</button>
                 </div>
             </form>
