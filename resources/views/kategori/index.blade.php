@@ -10,7 +10,10 @@
         <div class="card">
             <div class="card-header">Manage Kategori</div>
             <div class="card-body">
-                <a class= "btn-group flex-wrap" href="kategori/create">+ Tambah Kategori</a>
+                <button type="button" class="btn btn-primary" onclick="window.location.href='kategori/create'">Add
+                    Kategori</button>
+                {{-- <a class= "btn-group flex-wrap" href="kategori/create">+ Tambah Kategori</a> --}}
+                <br><br>
                 {{ $dataTable->table() }}
             </div>
         </div>
