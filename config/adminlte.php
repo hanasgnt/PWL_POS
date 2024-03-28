@@ -322,8 +322,24 @@ return [
             'label' => 4,
             'label_color' => 'success',
         ],
-        // Tugas no 2 - P5
+
         ['header' => 'MENU'],
+        [
+            'text' => 'Level',
+            'url' => 'level/tambah',
+            'icon' => 'fas fa-regular fa-user-plus',
+        ],
+        [
+            'text' => 'User',
+            'url' => 'user/tambah',
+            'icon' => 'fas fa-solid fa-user',
+        ],
+        [
+            'text' => 'M-User',
+            'url' => 'm_user',
+            'icon' => 'fas fa-solid fa-user',
+        ],
+        // Tugas no 2 - P5
         [
             'text' => 'Categories',
             'url' => 'kategori',

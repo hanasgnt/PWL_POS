@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Form Tambah Data User</title>
 </head>
 
 <body>
@@ -28,4 +28,46 @@
     </form>
 </body>
 
-</html>
+</html> --}}
+@extends('layout.app')
+
+{{-- Customize layout sections --}}
+
+@section('subtitle', 'User')
+@section('content_header_title', 'User')
+@section('content_header_subtitle', 'Add Data')
+{{-- Content body: main page content --}}
+@section('content')
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Form Tambah Data User</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <form method="post" action="tambah_simpan">
+                {{ csrf_field() }}
+                <!-- text input -->
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control" name="username" placeholder="Masukkan Username">
+                </div>
+                <div class="form-group">
+                    <label>Nama</label>
+                    <input type="text" class="form-control" name="nama" placeholder="Masukkan Nama">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" name="password" placeholder="Masukkan Password">
+                </div>
+                <div class="form-group">
+                    <label>Level ID</label>
+                    <input type="number" class="form-control" name="level_id" placeholder="Masukkan ID Level">
+                </div>
+                <div class="card-footer">
+                    <a href="../user" class="btn btn-secondary">Kembali</a>
+                    <button type="submit" class="btn btn-primary">Add Data</button>
+                </div>
+            </form>
+        </div>
+    </div>
+@endsection

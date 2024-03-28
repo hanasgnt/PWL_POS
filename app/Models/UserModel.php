@@ -12,8 +12,9 @@ class UserModel extends Model
     use HasFactory;
 
     protected $table = 'm_user'; //mendefinisikan nama tabel yg digunakan oleh model
+    public $timestamps = false;
     protected $primaryKey = 'user_id'; //mendefinisikan primary key dr tabel yg digunakan
-    protected $fillable = ['level_id', 'username', 'nama', 'password'];
+    protected $fillable = ['user_id', 'level_id', 'username', 'nama', 'password'];
 
     public function level(): BelongsTo
     {
