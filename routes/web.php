@@ -24,19 +24,29 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomeController::class, 'index']);
 
+Route::group(['prefix' => 'user'], function () {
+    Route::get('/', [UserController::class, 'index']);          // halaman awal user
+    Route::post('/list', [UserController::class, 'list']);      // data user dalam bentuk json untuk datatables
+    Route::get('/create', [UserController::class, 'create']);   // halaman form tambah user
+    Route::post('/', [UserController::class, 'store']);         // simpan data user baru
+    Route::get('/{id}', [UserController::class, 'show']);       // detail user
+    Route::get('/{id}/edit', [UserController::class, 'edit']);  // halaman form edit user
+    Route::put('/{id}', [UserController::class, 'update']);     // simpan perubahan data user
+    Route::delete('/{id}', [UserController::class, 'destroy']); // hapus data user
+});
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/level', [LevelController::class, 'index']);
 Route::get('/level/tambah', [LevelController::class, 'tambah']);
 Route::post('/level/tambah_simpan', [LevelController::class, 'tambah_simpan']);
 
-
-Route::get('/user', [UserController::class, 'index']);
+/*Route::get('/user', [UserController::class, 'index']);
 Route::get('/user/tambah', [UserController::class, 'tambah']);
 Route::post('/user/tambah_simpan', [UserController::class, 'tambah_simpan']);
 Route::get('/user/ubah/{id}', [UserController::class, 'ubah']);
 Route::put('/user/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']);
-Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
+Route::get('/user/hapus/{id}', [UserController::class, 'hapus']); */
 
 Route::get('/kategori', [KategoriController::class, 'index']);
 Route::post('/kategori', [KategoriController::class, 'store']);
