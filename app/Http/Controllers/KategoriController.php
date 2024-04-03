@@ -30,43 +30,43 @@ class KategoriController extends Controller
     }*/
 
     // Edit KategoriController - P6
-    // public function store(Request $request): RedirectResponse
-    // {
-    //     // B. Validasi pada server
-    //     $validated = $request->validate([
-    //         // 'kategori_kode' => ['required', 'unique:m_kategori', 'max:10'],
-    //         // 'kategori_nama' => ['required'],
-    //         'kategori_kode' => 'bail|required|unique:m_kategori|max:10',
-    //         'kategori_nama' => 'bail|required|unique:m_kategori',
-    //     ]);
-
-    //     KategoriModel::create([
-    //         'kategori_kode' => $request->kategori_kode,
-    //         'kategori_nama' => $request->kategori_nama,
-    //     ]);
-
-    //     return redirect('/kategori');
-    // }
-
-    public function store(StorePostRequest $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
-        // C. Form Request Validation
+        // B. Validasi pada server
+        $validatedData = $request->validate([
+            // 'kategori_kode' => ['required', 'unique:m_kategori', 'max:10'],
+            // 'kategori_nama' => ['required'],
+            'kategori_kode' => 'bail|required|unique:m_kategori|max:10',
+            'kategori_nama' => 'bail|required|unique:m_kategori',
+        ]);
 
-        // Retrieve the validated input data..
-        $validated = $request->validated();
-
-        // Retrieve a portion of the validated input data
-        $validated = $request->safe()->only(['kategori_kode', 'kategori_nama']);
-        $validated = $request->safe()->except(['kategori_kode', 'kategori_nama']);
-
-        // KategoriModel::create([
-        //     'kategori_kode' => $request->kategori_kode,
-        //     'kategori_nama' => $request->kategori_nama,
-        // ]);
-        // KategoriModel::create($validated);
+        KategoriModel::create([
+            'kategori_kode' => $request->kategori_kode,
+            'kategori_nama' => $request->kategori_nama,
+        ]);
 
         return redirect('/kategori');
     }
+
+    // public function store(StorePostRequest $request): RedirectResponse
+    // {
+    //     // C. Form Request Validation
+
+    //     // Retrieve the validated input data..
+    //     $validated = $request->validated();
+
+    //     // Retrieve a portion of the validated input data
+    //     $validated = $request->safe()->only(['kategori_kode', 'kategori_nama']);
+    //     $validated = $request->safe()->except(['kategori_kode', 'kategori_nama']);
+
+    //     // KategoriModel::create([
+    //     //     'kategori_kode' => $request->kategori_kode,
+    //     //     'kategori_nama' => $request->kategori_nama,
+    //     // ]);
+    //     // KategoriModel::create($validated);
+
+    //     return redirect('/kategori');
+    // }
 
     public function edit($id)
     {
