@@ -76,7 +76,7 @@ class PenjualanController extends Controller
             'penjualan_kode'        => 'required|string|min:5|unique:t_penjualan,penjualan_kode',
             'user_id'               => 'required|integer',
             'pembeli'               => 'required|string|max:100',
-            'penjualan_tanggal'     => 'required|date',
+            'penjualan_tanggal'     => 'required|date_format:Y-m-d\TH:i',
             'barang_id'             => 'required|integer',
             'jumlah'                => 'required|integer'
         ]);
@@ -147,7 +147,7 @@ class PenjualanController extends Controller
             'penjualan_kode'        => 'nullable|string|min:5|unique:t_penjualan,penjualan_kode,' . $id . ',penjualan_id',
             'user_id'               => 'required|integer',
             'pembeli'               => 'required|string|max:100',
-            'penjualan_tanggal'     => 'required|date'
+            'penjualan_tanggal'     => 'required|date_format:Y-m-d\TH:i'
         ]);
         PenjualanModel::find($id)->update([
             'penjualan_kode'        => $request->penjualan_kode ? ($request->penjualan_kode) : PenjualanModel::find($id)->penjualan_kode,
