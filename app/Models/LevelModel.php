@@ -11,6 +11,7 @@ class LevelModel extends Model
     use HasFactory;
     protected $table = 'm_level'; //mendefinisikan nama tabel yg digunakan oleh model
     protected $primaryKey = 'level_id'; //mendefinisikan primary key dr tabel yg digunakan
+    protected $fillable = ['level_kode', 'level_nama'];
 
     public function user(): BelongsTo
     {

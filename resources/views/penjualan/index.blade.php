@@ -1,33 +1,3 @@
-{{-- index old --}}
-
-{{-- @extends('layout.app')
-
-Customize layout sections
-
-@section('subtitle', 'Kategori')
-@section('content_header_title', 'Home')
-@section('content_header_subtitle', 'Kategori')
-@section('content')
-    <div class="container">
-        <div class="card">
-            <div class="card-header">Manage Kategori</div>
-            <div class="card-body">
-                <button type="button" class="btn btn-primary" onclick="window.location.href='kategori/create'">Add
-                    Kategori</button> --}}
-{{-- <a class= "btn-group flex-wrap" href="kategori/create">+ Tambah Kategori</a> --}}
-{{-- <br><br>
-                {{ $dataTable->table() }}
-            </div>
-        </div>
-    </div>
-@endsection
-
-@push('scripts')
-    {{ $dataTable->scripts() }}
-@endpush --}}
-
-{{-- Praktikum 7 - Tugas --}}
-
 @extends('layouts.template')
 
 @section('content')
@@ -35,7 +5,7 @@ Customize layout sections
         <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
             <div class="card-tools">
-                <a class="btn btn-sm btn-primary mt-1" href="{{ url('kategori/create') }}">Tambah</a>
+                <a class="btn btn-sm btn-primary mt-1" href="{{ url('penjualan/create') }}">Tambah</a>
             </div>
         </div>
         <div class="card-body">
@@ -45,30 +15,33 @@ Customize layout sections
             @if (session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
-            {{-- Praktikum 4 JS 7 --}}
-            {{-- <div class="row">
+            <div class="row">
                 <div class="col-md-12">
                     <div class="form-group-row">
                         <label class="col-1 control-label col-form-label">Filter:</label>
                         <div class="col-3">
-                            <select name="kategori_id" id="kategori_id" class="form-control" required>
+                            <select name="user_id" id="user_id" class="form-control" required>
                                 <option value="">- Semua -</option>
-                                @foreach ($kategori as $item)
-                                    <option value="{{ $item->kategori_id }}">{{ $item->kategori_nama }}</option>
+                                @foreach ($user as $item)
+                                    @if (($item->level_id == 1) | ($item->level_id == 2) | ($item->level_id == 3))
+                                        <option value="{{ $item->user_id }}">{{ $item->username }}</option>
+                                    @endif
                                 @endforeach
                             </select>
-                            <small class="form-text text-muted">Kategori Barang</small>
+                            <small class="form-text text-muted">Username Staff</small>
                         </div>
                     </div>
                 </div>
             </div>
-            <br> --}}
-            <table class="table table-bordered table-striped table-hover table-sm" id="table_kategori">
+            <br>
+            <table class="table table-bordered table-striped table-hover table-sm" id="table_penjualan">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Kode Kategori</th>
-                        <th>Nama Kategori</th>
+                        <th>Username Staff</th>
+                        <th>Pembeli</th>
+                        <th>Kode Penjualan</th>
+                        <th>Tanggal</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -76,20 +49,20 @@ Customize layout sections
         </div>
     </div>
 @endsection
-
 @push('css')
 @endpush
+
 @push('js')
     <script>
         $(document).ready(function() {
-            var dataKategori = $('#table_kategori').DataTable({
+            var dataPenjualan = $('#table_penjualan').DataTable({
                 serverSide: true, // serverSide: true, jika ingin menggunakan server side processing
                 ajax: {
-                    "url": "{{ url('kategori/list') }}",
+                    "url": "{{ url('penjualan/list') }}",
                     "dataType": "json",
                     "type": "POST",
                     "data": function(d) {
-                        d.kategori_id = $('#kategori_id').val();
+                        d.user_id = $('#user_id').val();
                     }
                 },
                 columns: [{
@@ -98,27 +71,36 @@ Customize layout sections
                     orderable: false,
                     searchable: false
                 }, {
-                    data: "kategori_kode",
+                    data: "user.username",
+                    className: "",
+                    orderable: false, // orderable: true, jika ingin kolom ini bisa diurutkan
+                    searchable: false // searchable: true, jika ingin kolom ini bisa dicari
+                }, {
+                    data: "pembeli",
                     className: "",
                     orderable: true, // orderable: true, jika ingin kolom ini bisa diurutkan
                     searchable: true // searchable: true, jika ingin kolom ini bisa dicari
                 }, {
-                    data: "kategori_nama",
+                    data: "penjualan_kode",
+                    className: "",
+                    orderable: true, // orderable: true, jika ingin kolom ini bisa diurutkan
+                    searchable: true // searchable: true, jika ingin kolom ini bisa dicari
+                }, {
+                    data: "penjualan_tanggal",
                     className: "",
                     orderable: true, // orderable: true, jika ingin kolom ini bisa diurutkan
                     searchable: true // searchable: true, jika ingin kolom ini bisa dicari
                 }, {
                     data: "aksi",
                     className: "",
-                    orderable: false, // orderable: true, jika ingin kolom ini bisa diurutkan
+                    orderable: false, // orderable: true, jika ingin kolom ini bisa  diurutkan
                     searchable: false // searchable: true, jika ingin kolom ini bisa dicari
+
                 }]
             });
-
-            // Praktikum 4 JS 7
-            $('#kategori_id').on('change', function() {
-                dataKategori.ajax.reload();
-            });
+            $('#user_id').on('change', function() {
+                dataPenjualan.ajax.reload();
+            })
         });
     </script>
 @endpush
