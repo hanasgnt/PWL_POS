@@ -12,6 +12,7 @@ use App\Http\Controllers\StokController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\FileUploadRenameController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,10 @@ Route::get('/', function () {
 // JS 12 -- FileUpload
 Route::get('/file-upload', [FileUploadController::class, 'fileUpload']);
 Route::post('/file-upload', [FileUploadController::class, 'prosesFileUpload']);
+
+// TUGAS JS 12 (NO 1) -- FileUpload
+Route::get('/file-upload-rename', [FileUploadRenameController::class, 'fileUpload']);
+Route::post('/file-upload-rename', [FileUploadRenameController::class, 'prosesFileUpload']);
 
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::get('register', [AuthController::class, 'register'])->name('register');
