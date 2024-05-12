@@ -15,7 +15,8 @@ class FileUploadController extends Controller
         // dump($request->berkas);
         // dump($request->file('berkas'));
         // return "Pemrosesan file upload di sini";
-        if ($request->hasFile('berkas')) {
+
+        /*if ($request->hasFile('berkas')) {
             echo "path(): " . $request->berkas->path();
             echo "<br>";
             echo "extension(): " . $request->berkas->extension();
@@ -29,6 +30,12 @@ class FileUploadController extends Controller
             echo "getSize(): " . $request->berkas->getSize();
         } else {
             echo "Tidak ada berkas yang diupload";
-        }
+        }*/
+
+        $request->validate([
+            'berkas' => 'required|file|image|max:500',
+        ]);
+
+        echo $request->berkas->getClientOriginalName() . "lolos validasi";
     }
 }
