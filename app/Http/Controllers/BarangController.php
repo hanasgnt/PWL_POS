@@ -76,13 +76,19 @@ class BarangController extends Controller
             'kategori_id'  => 'required|integer',
             'harga_beli'   => 'required|integer',
             'harga_jual'   => 'required|integer',
+            'image'        => 'required|file|image|max:1000',
         ]);
+
+        $namaFile = 'IMG' . time() . '-' . $request->image->getClientOriginalName();
+        $path = $request->image->storeAs('public/barang', $namaFile);
+
         BarangModel::create([
             'barang_kode'    => $request->barang_kode,
             'barang_nama'    => $request->barang_nama,
             'kategori_id'    => $request->kategori_id,
             'harga_beli'     => $request->harga_beli,
-            'harga_jual'     => $request->harga_jual
+            'harga_jual'     => $request->harga_jual,
+            'image'          => $namaFile
         ]);
 
         return redirect('/barang')->with('success', 'Data barang berhasil disimpan');
@@ -131,13 +137,21 @@ class BarangController extends Controller
             'kategori_id'  => 'required|integer',
             'harga_beli'   => 'required|integer',
             'harga_jual'   => 'required|integer',
+            'image'        => 'nullable|file|image|max:1000',
         ]);
+
+        if ($request->image) {
+            $namaFile = 'IMG' . time() . '-' . $request->image->getClientOriginalName();
+            $path = $request->image->storeAs('public/barang', $namaFile);
+        }
+
         BarangModel::find($id)->update([
             'barang_kode'    => $request->barang_kode,
             'barang_nama'    => $request->barang_nama,
             'kategori_id'    => $request->kategori_id,
             'harga_beli'     => $request->harga_beli,
-            'harga_jual'     => $request->harga_jual
+            'harga_jual'     => $request->harga_jual,
+            'image'          => $request->image ? $namaFile : basename(BarangModel::find($id)->image)
         ]);
 
         return redirect('/barang')->with('success', 'Data barang berhasil diubah');
